@@ -106,7 +106,10 @@ func (api PandaApi) signedParams(http_verb string, path string, data map[string]
 	for k, v := range data {
 		if k != "source_url" {
 			AuthParams[URLEscape(k)] = URLEscape(v)
+		} else {
+			AuthParams[k] = v
 		}
+
 	}
 
 	AdditionalParams := make(map[string]string)
