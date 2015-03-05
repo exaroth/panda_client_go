@@ -104,7 +104,9 @@ func (api PandaApi) signedParams(http_verb string, path string, data map[string]
 	AuthParams := map[string]string{"cloud_id": api.CloudId, "access_key": api.AccessKey, "timestamp": timestamp}
 
 	for k, v := range data {
-		if k != "source_url" {
+		fmt.Println("Key is: ", k)
+		fmt.Println("Value is: ", v)
+		if k != "source_url" || k != "profiles" {
 			AuthParams[URLEscape(k)] = URLEscape(v)
 		} else {
 			AuthParams[k] = v
