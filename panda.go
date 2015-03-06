@@ -104,9 +104,7 @@ func (api PandaApi) signedParams(http_verb string, path string, data map[string]
 	AuthParams := map[string]string{"cloud_id": api.CloudId, "access_key": api.AccessKey, "timestamp": timestamp}
 
 	for k, v := range data {
-		fmt.Println("Key is: ", k)
-		fmt.Println("Value is: ", v)
-		if k != "source_url" || k != "profiles" {
+		if k != "profiles" && k != "source_url" {
 			AuthParams[URLEscape(k)] = URLEscape(v)
 		} else {
 			AuthParams[k] = v
@@ -131,7 +129,6 @@ func (api PandaApi) signedParams(http_verb string, path string, data map[string]
 
 // build POST request
 func (api PandaApi) buildPostRequest(path string, params map[string]string, file string, FileType string) (*http.Request, error) {
-
 	boundary, end := "^{---panda---}v", "\r\n"
 
 	fp, err := os.OpenFile(file, os.O_RDONLY, 0)
